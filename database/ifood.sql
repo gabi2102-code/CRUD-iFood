@@ -20,7 +20,7 @@ create table restaurante(
 
 create table pedidos(
     id int auto_increment primary key,
-    cliente_id varchar(100) not null,
+    cliente_id varchar(50) not null,
     restaurante_id varchar(50) not null,
     data_pedido varchar(20),
     data_pedidos 
