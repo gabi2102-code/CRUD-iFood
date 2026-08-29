@@ -3,14 +3,14 @@
 include '../../infra/conexao.php'; 
  
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
-    $cliente = $_POST['cliente']; 
-    $prato = $_POST['prato']; 
-    $quantidade = $_POST['quantidade']; 
+    $data_pedido = $_POST['data_pedido']; 
     $valor = $_POST['valor']; 
-    $garcom_id = $_POST['garcom_id']; 
+    $status_pedido = $_POST['status_pedido']; 
+    $restaurante_id= $_POST['restaurante_id']; 
+    $cliente_id = $_POST['cliente_id']; 
  
-    $sql = "INSERT INTO pedidos (cliente, prato, quantidade, valor, garcom_id) 
-            VALUES ('$cliente', '$prato', '$quantidade', '$valor', '$garcom_id')"; 
+    $sql = "INSERT INTO pedidos (data_pedido, valor, status_pedido, restaurante_id, cliente_id) 
+            VALUES ('$data_pedido', '$valor', '$status_pedido', '$restaurante_id', '$cliente_id')"; 
  
     if ($conn->query($sql) === TRUE) { 
         echo "Novo pedido cadastrado com sucesso!"; 
@@ -34,42 +34,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
     <form method="POST"> 
  
-        <label for="cliente">Nome do Cliente:</label> 
-        <input type="text" id="cliente" name="cliente" required> 
+        <label for="data_pedido">Data do Pedido:</label> 
+        <input type="date" id="data_pedido" name="data_pedido" required> 
         <br><br> 
  
-        <label for="prato">Prato:</label> 
-        <input type="text" id="prato" name="prato" required> 
+        <label for="prato">Valor:</label> 
+        <input type="text" id="valor" name="valor" required> 
         <br><br> 
  
-        <label for="quantidade">Quantidade:</label> 
-        <input type="number" id="quantidade" name="quantidade" min="1" required> 
+        <label for="status_pedido">status_pedido:</label> 
+        <input type="number" id="status_pedido" name="status_pedido" min="1" required> 
         <br><br> 
  
-        <label for="valor">Valor (R$):</label> 
-        <input type="number" step="0.01" id="valor" name="valor" required> 
+        <label for="restaurante_id">Restaurante:</label> 
+        <input type="number" id="restaurante_id" name="restaurante_id" required> 
         <br><br> 
  
-        <label for="garcom_id">Garçom:</label> 
-        <select name="garcom_id" required> 
-            <option value="">Selecione o Garçom</option> 
+        <label for="cliente_id">Cliente:</label> 
+        <select name="cliente_id" required> 
+            <option value="">Selecione o Cliente</option> 
  
             <?php 
-                $sql = "SELECT id, nome FROM garcons"; 
-                $garcons = $conn->query($sql); 
- 
-                while ($garcom = $garcons->fetch_assoc()) { 
+                $sql = "SELECT id, nome FROM clientes"; 
+                $clientes = $conn->query($sql); 
+                while ($cliente = $clientes->fetch_assoc()) { 
             ?> 
  
-            <option value="<?php echo $garcom['id']; ?>">
-                <?php echo $garcom['nome']; ?>
+            <option value="<?php echo $cliente['id']; ?>">
+                <?php echo $cliente['nome']; ?>
             </option> 
- 
             <?php 
                 } 
             ?> 
+            
         </select> 
- 
+         <select name= "restaurante_id" required>
+            <option value="">selecione o restaurante desejado</option>
+            <?php
+             $sql = "SELECT id, nome FROM restaurantes";
+             $restaurantes = $conn->query($sql);
+             while ($restaurante = $restaurantes->fetch_assoc()) {
+            ?>
+            <option value="<?php echo $restaurante['id']; ?>">
+                <?php echo $restaurante['nome']; ?>
+            </option>
+            <?php
+             }
+            ?>
+         </select>
         <br><br> 
  
         <button type="submit">Cadastrar Pedido</button> 
