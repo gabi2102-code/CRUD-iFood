@@ -42,6 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="telefone">Telefone:</label>
         <input type="text" id="telefone" name="telefone" value="<?php echo $cliente['telefone']; ?>">
         <br><br>
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" value="<?php echo $cliente['endereco']; ?>">
+        <br><br>
         <button type="submit">Editar Cliente</button>
     </form> 
     <br>  

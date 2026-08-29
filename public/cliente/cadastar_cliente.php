@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Novo Usuario</title>
+    <title>Adicionar Novo cliente</title>
 </head>
 <body>
     <h2>Adicionar Novo Cliente</h2>
@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
         <label for="telefone">Telefone:</label>
         <input type="text" id="telefone" name="telefone">
+        <br><br>
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco">
         <br><br>
         <button type="submit">Cadastrar Cliente</button>
     </form> 
